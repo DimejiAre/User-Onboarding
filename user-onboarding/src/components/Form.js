@@ -1,9 +1,39 @@
 import React from 'react';
 import * as yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import styled from 'styled-components';
+
+const StyledForm = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid black;
+
+    input {
+    height: 20px;
+    width: 30vw;
+    }
+
+    label {
+    margin-top: 10px;
+    width: 20vw;
+    }
+
+    button {
+    background-color: cornflowerblue;
+    margin-top: 15px;
+    height: 35px;
+    border-radius: 5px;
+    }
+`;
 
 const initialUser = {
-
+    name: '',
+    email: '',
+    password: '',
+    terms: null,
 }
 
 const validationSchema = yup.object().shape({
@@ -26,6 +56,7 @@ function UserForm(props){
         render={props => {
             return (
                 <Form>
+                    <StyledForm>
                     <label>
                         Name
                         <Field name='name' type='text' placeholder='Name'/>
@@ -47,6 +78,7 @@ function UserForm(props){
                         <ErrorMessage name='name' component='div' />
                     </label>                   
                     <button type='submit'>Submit</button>
+                    </StyledForm>
                 </Form>
             )
         }}/>
