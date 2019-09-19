@@ -10,13 +10,16 @@ function App() {
 
   const validationSchema = yup.object().shape({
     name: yup.string()
-    .required('You must enter a Name'),
+    .required('You must enter a Name')
+    .min(2).max(50),
     email: yup.string()
     .email('You must enter a valid email address')
     .required('You must enter a valid email address'),
     password: yup.string()
-    .required('You must enter a password'),
-    terms: yup.boolean().nullable().required('You must accept terms and conditions to continue')
+    .required('You must enter a password')
+    .min(7),
+    terms: yup.mixed().oneOf([true],'You must accept terms and conditions to continue')
+    .required('You must accept terms and conditions to continue')
   });
 
   const addUser = (formValue, actions) => {

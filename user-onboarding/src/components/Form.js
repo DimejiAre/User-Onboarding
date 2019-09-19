@@ -36,7 +36,7 @@ const initialUser = {
     name: '',
     email: '',
     password: '',
-    terms: null,
+    terms: false,
 }
 
 
@@ -69,7 +69,7 @@ function UserForm(props){
                     </label>                   
                     <label>
                         I agree to terms and conditions
-                        <Field name='terms' type='checkbox' />
+                        <Field name='terms' type='checkbox' checked={props.values.terms}/>
                         <ErrorMessage name='terms' component='div' />
                     </label>                   
                     <button type='submit'>Submit</button>
