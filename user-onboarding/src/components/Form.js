@@ -1,5 +1,4 @@
 import React from 'react';
-import * as yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import styled from 'styled-components';
 
@@ -19,6 +18,10 @@ const StyledForm = styled.div`
     label {
     margin-top: 10px;
     width: 20vw;
+
+    div {
+        color: red;
+    }
     }
 
     button {
@@ -36,18 +39,10 @@ const initialUser = {
     terms: null,
 }
 
-const validationSchema = yup.object().shape({
-    name: yup.string()
-    .required('You must enter a Name'),
-    email: yup.string()
-    .email('You must enter a valid email address')
-    .required('You must enter a valid email address'),
-    password: yup.string()
-    .required('You must enter a password'),
-  });
+
 
 function UserForm(props){
-    const {addUser} = props;
+    const {addUser, validationSchema} = props;
     return (
         <Formik 
         validationSchema={validationSchema}
@@ -65,17 +60,17 @@ function UserForm(props){
                     <label>
                         Email
                         <Field name='email' type='text' placeholder='Email'/>
-                        <ErrorMessage name='name' component='div' />
+                        <ErrorMessage name='email' component='div' />
                     </label>                    
                     <label>
                         Password
                         <Field name='password' type='password' placeholder='Password'/>
-                        <ErrorMessage name='name' component='div' />
+                        <ErrorMessage name='password' component='div' />
                     </label>                   
                     <label>
                         I agree to terms and conditions
                         <Field name='terms' type='checkbox' />
-                        <ErrorMessage name='name' component='div' />
+                        <ErrorMessage name='terms' component='div' />
                     </label>                   
                     <button type='submit'>Submit</button>
                     </StyledForm>

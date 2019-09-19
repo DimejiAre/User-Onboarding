@@ -2,11 +2,22 @@ import React, {useState} from 'react';
 import Form from './components/Form';
 import Users from './components/Users';
 import axios from 'axios';
-import './App.css';
+import * as yup from 'yup';
 
 function App() {
 
   const url = 'https://reqres.in/api/users';
+
+  const validationSchema = yup.object().shape({
+    name: yup.string()
+    .required('You must enter a Name'),
+    email: yup.string()
+    .email('You must enter a valid email address')
+    .required('You must enter a valid email address'),
+    password: yup.string()
+    .required('You must enter a password'),
+    terms: yup.boolean().nullable().required('You must accept terms and conditions to continue')
+  });
 
   const addUser = (formValue, actions) => {
     console.log(formValue)
@@ -34,7 +45,8 @@ function App() {
     <div>
       {serverError}
       <Form 
-      addUser={addUser}/>
+      addUser={addUser}
+      validationSchema={validationSchema}/>
       <Users 
       users={users}/>
     </div>
