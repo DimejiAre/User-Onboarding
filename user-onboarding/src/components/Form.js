@@ -6,10 +6,6 @@ const initialUser = {
 
 }
 
-const onSubmit = () => {
-
-}
-
 const validationSchema = yup.object().shape({
     name: yup.string()
     .required('You must enter a Name'),
@@ -21,11 +17,12 @@ const validationSchema = yup.object().shape({
   });
 
 function UserForm(props){
+    const {addUser} = props;
     return (
         <Formik 
         validationSchema={validationSchema}
         initialValues={initialUser}
-        onSubmit={onSubmit}
+        onSubmit={addUser}
         render={props => {
             return (
                 <Form>
